@@ -1,5 +1,7 @@
 import json
 
+import aiohttp
+
 from ..base import provider
 
 
@@ -22,11 +24,14 @@ async def get_streams(client, trackinfo):
         if item['format']['protocol'] not in ['hls', 'progressive']:
             continue
 
-        streaminfo = await client.fetch_json(item['url'], params={
-            'client_id': trackinfo['_client_id'],
-            'track_authorization': trackinfo['track_authorization'],
-        })
-        return streaminfo['url']
+        try:
+            streaminfo = await client.fetch_json(item['url'], params={
+                'client_id': trackinfo['_client_id'],
+                'track_authorization': trackinfo['track_authorization'],
+            })
+            return streaminfo['url']
+        except aiohttp.ClientResponseError:
+            pass
 
 
 @provider(r'https?://soundcloud.com/([^/]+)/([^/]+)', tests={
