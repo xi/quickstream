@@ -37,7 +37,6 @@ async def soundcloud_track(client, url, uploader, id):
         'id': trackinfo['id'],
         'url': trackinfo['permalink_url'],
         'title': trackinfo['title'],
-        'artist': trackinfo['publisher_metadata']['artist'],
         'duration': trackinfo['duration'] / 1000,
         'stream': await get_streams(client, trackinfo),
     }

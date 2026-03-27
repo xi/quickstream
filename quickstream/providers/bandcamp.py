@@ -17,7 +17,6 @@ async def bandcamp_track(client, url, uploader, id):
     return {
         'id': trackinfo['id'],
         'url': tralbum['url'],
-        'artist': trackinfo['artist'] or tralbum['artist'],
         'title': trackinfo['title'],
         'duration': trackinfo['duration'],
         'stream': get_stream(trackinfo),
