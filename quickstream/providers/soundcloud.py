@@ -29,7 +29,14 @@ async def get_streams(client, trackinfo):
         return streaminfo['url']
 
 
-@provider(r'https?://soundcloud.com/([^/]+)/([^/]+)')
+@provider(r'https?://soundcloud.com/([^/]+)/([^/]+)', tests={
+    'http://soundcloud.com/ethmusic/lostin-powers-she-so-heavy': {
+        'id': 62986583,
+        'url': 'https://soundcloud.com/ethmusic/lostin-powers-she-so-heavy',
+        'title': 'Lostin Powers - She so Heavy (SneakPreview) Adrian Ackers Blueprint 1',  # noqa
+        'duration': 143.216,
+    },
+})
 async def soundcloud_track(client, url, uploader, id):
     soup = await client.fetch_html(url)
     trackinfo = get_trackinfo(soup)
