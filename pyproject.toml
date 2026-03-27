@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quickstream"
+version = "0.0.0"
+description = "Find stream URIs for common streaming services."
+readme = "README.md"
+license = "MIT"
+authors = [
+    {name = "Tobias Bengfort", email = "tobias.bengfort@posteo.de"}
+]
+dependencies = [
+    "aiohttp",
+    "beautifulsoup4",
+]
+
+[project.urls]
+Homepage = "https://github.com/xi/quickstream"
+
+[project.scripts]
+quickstream = "quickstream:main"
