@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 
 from .base import registry
 from .providers import bandcamp  # noqa
+from .providers import mixcloud  # noqa
 from .providers import soundcloud  # noqa
 
 
@@ -24,6 +25,13 @@ class Client:
 
     async def fetch_json(self, url, **kwargs):
         r = await self.session.get(url, **kwargs)
+        return await r.json()
+
+    async def graphql(self, url, query, **kwargs):
+        r = await self.session.post(url, json={
+            'query': query,
+            'variables': kwargs,
+        })
         return await r.json()
 
 
