@@ -1,6 +1,6 @@
+import argparse
 import asyncio
 import json
-import sys
 
 import aiohttp
 from bs4 import BeautifulSoup
@@ -9,6 +9,10 @@ from .base import registry
 from .providers import bandcamp  # noqa
 from .providers import mixcloud  # noqa
 from .providers import soundcloud  # noqa
+
+parser = argparse.ArgumentParser()
+parser.add_argument('url')
+parser.add_argument('--verbose', action='store_true')
 
 
 class Client:
@@ -45,5 +49,9 @@ async def extract(url):
 
 
 def main():
-    data = asyncio.run(extract(sys.argv[1]))
-    print(json.dumps(data, indent=2))
+    args = parser.parse_args()
+    data = asyncio.run(extract(args.url))
+    if args.verbose:
+        print(json.dumps(data, indent=2))
+    else:
+        print(data['stream'])
