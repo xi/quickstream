@@ -16,23 +16,23 @@ class Client:
         self.session = session
 
     async def fetch(self, url, **kwargs):
-        r = await self.session.get(url, **kwargs)
-        return await r.read()
+        async with await self.session.get(url, **kwargs) as r:
+            return await r.read()
 
     async def fetch_html(self, url, **kwargs):
         html = await self.fetch(url, **kwargs)
         return BeautifulSoup(html, 'html.parser')
 
     async def fetch_json(self, url, **kwargs):
-        r = await self.session.get(url, **kwargs)
-        return await r.json()
+        async with await self.session.get(url, **kwargs) as r:
+            return await r.json()
 
     async def graphql(self, url, query, **kwargs):
-        r = await self.session.post(url, json={
+        async with await self.session.post(url, json={
             'query': query,
             'variables': kwargs,
-        })
-        return await r.json()
+        }) as r:
+            return await r.json()
 
 
 async def extract(url):
