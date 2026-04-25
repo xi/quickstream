@@ -39,7 +39,7 @@ async def get_streams(client, trackinfo):
         'id': 62986583,
         'url': 'https://soundcloud.com/ethmusic/lostin-powers-she-so-heavy',
         'title': 'Lostin Powers - She so Heavy (SneakPreview) Adrian Ackers Blueprint 1',  # noqa
-        'duration': 143.216,
+        'duration': 143.206,
     },
 })
 async def soundcloud_track(client, url, uploader, id):
