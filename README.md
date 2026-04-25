@@ -12,7 +12,7 @@ This project is similar in spirit to [yt-dlp](https://github.com/yt-dlp/yt-dlp),
 
 ## usage
 
-```
+```python
 >>> import quickstream
 >>> await quickstream.extract('http://youtube-dl.bandcamp.com/track/youtube-dl-test-song')
 {
